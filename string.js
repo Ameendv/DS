@@ -65,9 +65,11 @@ function expand(string) {
         i++
     }
     return newString
-
+ 
 }
 
 console.log(expand('A10'))
+
+
 
 
