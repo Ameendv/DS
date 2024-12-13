@@ -95,3 +95,37 @@ linkedList.append(3)
 linkedList.append(4)
 linkedList.insertBeforeTo(3, 5)
 linkedList.display()
+
+
+
+const getMainCategoriesWithAllSubcategories = async () => {
+  const categories = await Category.aggregate([
+    {
+      $match: {
+        parentId: null, // Only main categories
+      },
+    },
+    {
+      $graphLookup: {
+        from: 'categories', // Same collection
+        startWith: '$_id', // Start with the main category's _id
+        connectFromField: '_id', // Connect from the current category's _id
+        connectToField: 'parentId', // Match to the parentId of subcategories
+        as: 'subcategories', // Store the result as subcategories
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        subcategories: {
+          _id: 1,
+          name: 1,
+          parentId: 1,
+        }, // Only include relevant fields in subcategories
+      },
+    },
+  ]);
+
+  return categories;
+};
