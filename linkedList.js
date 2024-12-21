@@ -1,80 +1,4 @@
-// class Node {
-//     constructor(data) {
-//         this.data = data
-//         this.next = null
-//     }
-// }
 
-// class LinkedList {
-//     constructor() {
-//         this.head = null
-//     }
-
-//     append(data){
-//         const newNode = new Node(data)
-
-//         if(!this.head){
-//             this.head = newNode
-//             return 
-//         }
-//         let current = this.head
-
-//         while(current.next){ 
-//             current = current.next
-//         }
-
-//         current.next = newNode
-
-//     }
-// }
-
-// class Node{
-//     constructor(data){
-//         this.data = data
-//         this.next = null
-//     }
-// }
-
-// class LinkedList {
-//     constructor() {
-//         this.head = null
-//     }
-    
-//     append(data) {
-
-//         const newNode = new Node(data)
-
-//         if(!this.head){
-//             this.head = newNode
-//             return
-//         }
-
-//         let tail = this.head
-
-//         while(tail.next){
-//             tail = tail.next
-//         }
-
-//         tail.next = newNode
-
-
-//     }
-    
-//     display() {
-//         if (!this.head) {
-//             console.log('linked list is empty')
-//         }
-//     let temp = this.head
-//     while(temp){
-//         console.log(temp.data, temp.next)
-//         temp = temp.next
-//     }
-
-//     }
-
-
-
-// }
 
 class Node{
     constructor(data){
@@ -200,35 +124,6 @@ class LinkedList{
     
 
 }
-// delete(data){
-//     if(this.head.data === data){
-//         this.head = this.head.next
-//         return
-//     }
-
-//     let temp = this.head
-//     let prev = null
-
-//     while(temp && temp.data !== data){
-//         prev = temp
-//         temp = temp.next
-//     }
-
-//     if(!temp){
-//         console.log('no data matched to delete')
-//         return
-//     }
-
-//     if(temp === this.tail){
-       
-//        this.tail = prev
-//        this.tail.next = null
-//         return
-//     }
-
-//     prev.next = temp.next
-
-// }
 const linkedList = new LinkedList()
 
 linkedList.append(1)

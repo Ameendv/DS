@@ -1,10 +1,11 @@
-class Node{
+class Node1{
     constructor(data){
         this.data = data
         this.left = null
         this.right = null
     }
 }
+
 
 class Bst{
     constructor(){
@@ -23,6 +24,7 @@ class Bst{
         }
 
         while(true){
+            console.log(current.data)
             if(data<current.data){
                 if(!current.left){
                     current.left = newNode
@@ -63,63 +65,177 @@ class Bst{
         return false
     }
 
-    remove(data){
-        
-       this.root =  this.removeHelper(this.root, data)
+  remove(data){
+    this.root = this.removeHelper(data, this.root)
+  }
+
+  removeHelper(data, currentNode){
+    if(!currentNode){
+        return null
     }
 
-    removeHelper(node, data){
-        
-        if(!node){
+    if(data<currentNode.data){
+        currentNode.left = this.removeHelper(data, currentNode.left)
+    }else if(data>currentNode.data){
+        currentNode.right= this.removeHelper(data, currentNode.right)
+    }else{
+
+        if(!currentNode.right && !currentNode.left){
             return null
         }
 
-        if (data < node.data) {//traverse left sub tree
-            
-            node.left = this.removeHelper(node.left, data)
-        } else if (data > node.data) {//traverse right subtree
-            node.right = this.removeHelper(node.right, data)
-        }else {//match found
-            //no child case
-            if(!node.left && !node.right){
-                return null
-            }
-
-            //case 2 , one child
-            if(!node.right) return node.left
-            if(!node.left) return node.right
-
-            const minValue = this.getMinNode(node.right)
-            node.data = minValue.data
-            node.right = this.removeHelper(node.right, minValue.value)
-
-
+        if(!currentNode.left){
+            return currentNode.right
+        }else if(!currentNode.right){
+            return currentNode.left
         }
 
+        currentNode.data = this.getMinValue(currentNode.right)
+        currentNode.right = this.removeHelper(currentNode.data, currentNode.right)
     }
 
-    getMinNode(currentNode) {
-       while(currentNode.left){
-        currentNode = currentNode.left
-       }
-       return currentNode
+    return currentNode
+
+  }
+
+    getMinValue(node){
+        while(node.left){
+            node = node.left
+        } 
+
+        return node.data
     }
+
+    
     inOrderTraversal(node = this.root) {
         if (!node) return;
 
         this.inOrderTraversal(node.left);
-        console.log(node.value);
+        console.log(node.data);
         this.inOrderTraversal(node.right);
       }
     
 }
-const bst = new Bst()
+// const bst = new Bst()
 
-bst.insert(10)
-bst.insert(5)
-bst.insert(18)
-// bst.remove(18)
+// bst.insert(10)
+// bst.insert(5)
+// bst.insert(18)
 
-bst.inOrderTraversal()
+// bst.remove(5)
 
-// console.log(bst.contains(18))
+// bst.inOrderTraversal()
+
+// console.log(bst.contains(10))
+
+
+class Node{
+    constructor(data){
+        this.data = data
+        this.left= null
+        this.right = null
+    }
+}
+
+class BST {
+    constructor() {
+        this.root = null
+    }
+
+    insert(data) {
+        const newNode = new Node(data)
+        if (!this.root) {
+            this.root = newNode
+            return
+        }
+
+        let currentNode = this.root
+
+        while (true) {
+            if (data < currentNode.data) {
+                if (!currentNode.left) {
+                   return currentNode.left = newNode
+                } else {
+                    currentNode = currentNode.left
+                }
+            } else {
+                if (!currentNode.right) {
+                    currentNode.right = newNode
+                    return
+                } else {
+                    currentNode = currentNode.right
+                }
+            }
+        }
+    }
+
+    contains(data){
+        let current = this.root
+        while(current){
+            if(data<current.data){
+                current = current.left
+            }else if(data>current.data){
+                current = current.right
+            }else{
+                return true
+            }
+        }
+        return false
+    }
+
+    inOrderTraversal(node = this.root) {
+
+        if(!node) return 
+        this.inOrderTraversal(node.left)
+        console.log(node.data)
+        this.inOrderTraversal(node.right)
+    }
+
+    remove(data){
+        this.root = this.removeHelper(data, this.root)
+    }
+
+    removeHelper(data, current){
+
+        if(data<current.data){
+            current.left = this.removeHelper(data, current.left)
+        }else if(data>current.data){
+            current.right= this.removeHelper(data, current.right)
+        }else{
+            if(!current.left && !current.right){
+                return null
+            }
+
+            if(!current.left){
+                return current.right
+            }
+            if(!current.right){
+                return current.left
+            }
+
+            current.data = this.getMinValue(current.right)
+            current.right = this.removeHelper(current.data, current.right)
+
+
+        }
+        return current
+    }
+
+    getMinValue(node){
+        while(node.left){
+            node = node.left
+        }
+
+        return node.data
+    }
+
+}
+
+const bstNew = new BST()
+bstNew.insert(10)
+bstNew.insert(15)
+bstNew.insert(8)
+bstNew.insert(16)
+bstNew.remove(16)
+bstNew.inOrderTraversal()
+// console.log(bstNew.contains(1))

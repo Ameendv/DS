@@ -1,48 +1,102 @@
+// class TrieNode{
+//     constructor(){
+//         this.children = {}
+//         this.isEndOfWord = false
+//     }
+// }
+
+// class SuffixTrie{
+//     constructor(){
+//         this.root = new TrieNode()
+//     }
+
+//     insertSuffix(suffix){
+//         let current = this.root
+//         for(let char of suffix){
+//             if(!current.children[char]){
+//                 current.children[char] = new TrieNode()
+//             }
+//             current = current.children[char]
+//         }
+//         current.isEndOfWord = true
+//     }
+
+//     buildSuffixAndInsert(string){
+//         for (let i = 0;i<string.length;i++){
+//             this.insertSuffix(string.slice(i))
+//         }
+//     }
+
+//     search(string){
+//         let current = this.root
+//         for(let char of string){
+
+//             if(!current.children[char]){
+//                 return false
+//             }
+//             current = current.children[char]
+
+//             // return current.isEndOfWord
+//         }
+//         return current.isEndOfWord
+//     }
+// }
+
+// let trieSuffix = new SuffixTrie()
+// trieSuffix.buildSuffixAndInsert('banana')
+// console.log(trieSuffix.search('ananaa'))
+
+
+
 class TrieNode{
     constructor(){
         this.children = {}
-        this.isEndOfWord = false
+        this.endOfWord = false
     }
 }
 
-class SuffixTrie{
+class Trie{
     constructor(){
         this.root = new TrieNode()
     }
 
-    insertSuffix(suffix){
+    insertSuffix(str){
         let current = this.root
-        for(let char of suffix){
+        for(let char of str){
             if(!current.children[char]){
                 current.children[char] = new TrieNode()
             }
+
             current = current.children[char]
         }
-        current.isEndOfWord = true
+
+        current.endOfWord = true
     }
 
-    buildSuffixAndInsert(string){
-        for (let i = 0;i<string.length;i++){
-            this.insertSuffix(string.slice(i))
+    buildSuffix(str){
+        for(let i = 0;i<str.length;i++){
+            this.insertSuffix(str.slice(i))
         }
     }
 
-    search(string){
-        let current = this.root
-        for(let char of string){
-
+    search(str){
+        let current= this.root
+        for(let char of str){
             if(!current.children[char]){
                 return false
             }
             current = current.children[char]
-
-            // return current.isEndOfWord
         }
-        return current.isEndOfWord
+
+        return current.endOfWord
     }
 }
 
-let trieSuffix = new SuffixTrie()
-trieSuffix.buildSuffixAndInsert('banana')
-console.log(trieSuffix.search('ananaa'))
+const trie = new Trie()
 
+// trie.buildSuffix('ameena')
+trie.insertSuffix('ameen')
+trie.insertSuffix('ansar')
+trie.insertSuffix('amras')
+
+console.log(trie.search('ansar'))
