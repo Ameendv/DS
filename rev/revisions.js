@@ -53,7 +53,6 @@ function selectionSort(arr){
 //quick sort
 function quickSort(array){
     quickSortHelper1(array, 0, array.length-1)
-    console.log(array)
 }
 
 function quickSortHelper1(array, startIdx, endIdx){
@@ -153,7 +152,6 @@ class LinkedList{
             return 
         }
 
-        let current = this.head
         this.tail.next = newNode
         this.tail = newNode
     }
@@ -576,8 +574,10 @@ class Graph{
             result.push(current)
 
             this.map.get(current).forEach(data=>{
-                if(!visited[data]){stack.push(data)
-                visited[data] = true}
+                if (!visited[data]) {
+                    stack.push(data)
+                    visited[data] = true
+                }
             })
 
         }

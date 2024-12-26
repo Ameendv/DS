@@ -12,8 +12,7 @@ function quickSortHelper(array, startIndex, endIndex) {
 
 
     while(leftIdx<=rightIdx){
-        console.log('a')
-        if(array[leftIdx]>array[pivotIdx] && array[rightIdx]<array[pivotIdx]){
+        if(array[leftIdx]>=array[pivotIdx] && array[rightIdx]<=array[pivotIdx]){
             [array[leftIdx],array[rightIdx]]=[array[rightIdx],array[leftIdx]]
             leftIdx++
             rightIdx--
@@ -36,4 +35,4 @@ function quickSortHelper(array, startIndex, endIndex) {
 
 }
 
-console.log(quickSort([5,4,3,6,7,10,0]))
+console.log(quickSort([12,21,23,32,34,43,11,77,88,22,0,12,76,89,98,67]))
